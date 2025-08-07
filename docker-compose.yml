@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  aya-wallet-mcp:
+    build: .
+    container_name: aya-wallet-mcp
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=info
+      - HEDERA_NETWORK=testnet
+      - HEDERA_OPERATOR_ID=${HEDERA_OPERATOR_ID}
+      - HEDERA_OPERATOR_KEY=${HEDERA_OPERATOR_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_API_URL=${OPENAI_API_URL}
+      - SAUCERSWAP_API_URL=${SAUCERSWAP_API_URL}
+      - SAUCERSWAP_ROUTER_ADDRESS=${SAUCERSWAP_ROUTER_ADDRESS}
+      - JWT_SECRET=${JWT_SECRET}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('MCP Server is healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Add a monitoring service
+  monitoring:
+    image: grafana/grafana:latest
+    container_name: aya-wallet-monitoring
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    depends_on:
+      - aya-wallet-mcp
+    profiles:
+      - monitoring
+
+volumes:
+  grafana-storage: 

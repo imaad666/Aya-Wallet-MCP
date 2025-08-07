@@ -1,0 +1,49 @@
+{
+  "name": "aya-wallet-mcp",
+  "version": "1.0.0",
+  "description": "MCP Tool for Aya AI Hackathon - Hedera DeFi Integration",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts"
+  },
+  "keywords": [
+    "mcp",
+    "hedera",
+    "defi",
+    "saucerswap",
+    "elizaos",
+    "aya",
+    "hackathon"
+  ],
+  "author": "Aya AI Hackathon Team",
+  "license": "MIT",
+  "dependencies": {
+    "@hashgraph/sdk": "^2.40.0",
+    "@modelcontextprotocol/sdk": "^0.4.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "ethers": "^6.8.1",
+    "ws": "^8.14.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "@types/ws": "^8.5.8",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.53.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3",
+    "tsx": "^4.1.0",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
